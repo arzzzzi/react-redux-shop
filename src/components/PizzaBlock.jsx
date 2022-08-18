@@ -1,26 +1,42 @@
+import React, { useState } from 'react';
+
 function PizzaBlock({ title, price }) {
+  const [count, setCount] = useState(0);
+  const [activePoint, setActivePoint] = useState(0);
+  const [size, setSize] = useState(0);
+
   return (
-    <div class="pizza-block">
+    <div className="pizza-block">
       <img
-        class="pizza-block__image"
+        className="pizza-block__image"
         src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
         alt="Pizza"
       />
-      <h4 class="pizza-block__title">{title}</h4>
-      <div class="pizza-block__selector">
+      <h4 className="pizza-block__title">{title}</h4>
+      <div className="pizza-block__selector">
         <ul>
-          <li class="active">тонкое</li>
-          <li>традиционное</li>
+          <li onClick={() => setActivePoint(0)} className={activePoint === 0 ? 'active' : ''}>
+            тонкое
+          </li>
+          <li onClick={() => setActivePoint(1)} className={activePoint === 1 ? 'active' : ''}>
+            традиционное
+          </li>
         </ul>
         <ul>
-          <li class="active">26 см</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          <li onClick={() => setSize(0)} className={size === 0 ? 'active' : ''}>
+            26 см
+          </li>
+          <li onClick={() => setSize(1)} className={size === 1 ? 'active' : ''}>
+            30 см.
+          </li>
+          <li onClick={() => setSize(2)} className={size === 2 ? 'active' : ''}>
+            40 см.
+          </li>
         </ul>
       </div>
-      <div class="pizza-block__bottom">
-        <div class="pizza-block__price">от {price} ₽</div>
-        <div class="button button--outline button--add">
+      <div className="pizza-block__bottom">
+        <div className="pizza-block__price">от {price} ₽</div>
+        <button onClick={() => setCount(count + 1)} className="button button--outline button--add">
           <svg
             width="12"
             height="12"
@@ -33,8 +49,8 @@ function PizzaBlock({ title, price }) {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
-        </div>
+          <i>{count}</i>
+        </button>
       </div>
     </div>
   );
