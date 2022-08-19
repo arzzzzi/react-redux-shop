@@ -8,16 +8,14 @@ function Categories() {
   return (
     <div className="categories">
       <ul>
-        {categories.map((item, index) => {
-          return (
-            <li
-              key={index}
-              onClick={() => setActiveCategory(index)}
-              className={activeCategory === index ? 'active' : ''}>
-              {item}
-            </li>
-          );
-        })}
+        {categories.map((item, index) => (
+          <li
+            key={index}
+            onClick={() => setActiveCategory(index)}
+            className={activeCategory === index ? 'active' : ''}>
+            {item}
+          </li>
+        ))}
       </ul>
     </div>
   );
