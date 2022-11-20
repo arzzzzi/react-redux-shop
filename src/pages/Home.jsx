@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
+import { AppContext } from '../App';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategoryId } from '../redux/slices/filterSlice';
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+  const categoryId = useSelector((state) => state.filter.categoryId);
+  const dispatch = useDispatch();
+  const sortType = useSelector((state) => state.filter.sortType.sortProperty);
+
+  const { searchValue } = useContext(AppContext);
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [categoryId, setCategoryId] = useState(0);
-  const [sortType, setSortType] = useState({
-    name: 'популярности',
-    sort: 'rating',
-  });
 
   useEffect(() => {
     setIsLoading(true);
 
-    const order = sortType.sort.includes('-') ? 'asc' : 'desc';
-    const sortBy = sortType.sort.replace('-', '');
+    const order = sortType.includes('-') ? 'asc' : 'desc';
+    const sortBy = sortType.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
@@ -34,14 +37,14 @@ const Home = ({ searchValue }) => {
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue, currentPage]);
 
-  const skeletons = [...new Array(6)].map(() => <Skeleton />);
+  const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
   const items = pizzas.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories onClickCategory={(id) => setCategoryId(id)} value={categoryId} />
-        <Sort value={sortType} onClickSort={(id) => setSortType(id)} />
+        <Categories onClickCategory={(id) => dispatch(setCategoryId(id))} value={categoryId} />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : items}</div>
