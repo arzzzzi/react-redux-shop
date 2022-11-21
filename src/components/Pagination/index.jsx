@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 
 import styles from './Pagination.module.scss';
 
-const Pagination = ({ currnetPage, onChangePage }) => {
+export const Pagination = ({ currnetPage, onChangePage }) => {
   return (
     <ReactPaginate
       className={styles.root}
@@ -18,5 +18,3 @@ const Pagination = ({ currnetPage, onChangePage }) => {
     />
   );
 };
-
-export default Pagination;

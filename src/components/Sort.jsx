@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortType } from '../redux/slices/filterSlice';
 
-const list = [
+export const list = [
   { name: 'популярности ↓', sortProperty: 'rating' },
   { name: 'популярности ↑', sortProperty: '-rating' },
   { name: 'цене ↓', sortProperty: 'price' },
@@ -11,9 +13,10 @@ const list = [
   { name: 'алфавиту ↑', sortProperty: '-title' },
 ];
 
-function Sort() {
-  const sortType = useSelector((state) => state.filter.sortType);
+export const Sort = () => {
+  const sort = useSelector((state) => state.filter.sort);
   const dispatch = useDispatch();
+  const sortRef = useRef();
   const [visible, setVisible] = useState(false);
 
   const selection = (obj) => {
@@ -21,8 +24,23 @@ function Sort() {
     setVisible(false);
   };
 
+  useEffect(() => {
+    // когда компонент отрендерился (didMount)
+    const handleClickCLose = (event) => {
+      if (!event.path.includes(sortRef.current)) {
+        setVisible(false);
+      }
+    };
+
+    document.body.addEventListener('click', handleClickCLose);
+    // очищает после эффекта (willUnmount)
+    return () => {
+      document.body.removeEventListener('click', handleClickCLose);
+    };
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
@@ -36,7 +54,7 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setVisible(!visible)}>{sortType.name}</span>
+        <span onClick={() => setVisible(!visible)}>{sort.name}</span>
       </div>
       {visible && (
         <div className="sort__popup">
@@ -45,7 +63,7 @@ function Sort() {
               <li
                 key={index}
                 onClick={() => selection(obj)}
-                className={sortType.sortProperty === obj.sortProperty ? 'active' : ''}>
+                className={sort.sortProperty === obj.sortProperty ? 'active' : ''}>
                 {obj.name}
               </li>
             ))}
@@ -54,6 +72,4 @@ function Sort() {
       )}
     </div>
   );
-}
-
-export default Sort;
+};
