@@ -27,11 +27,10 @@ export const Sort = () => {
   useEffect(() => {
     // когда компонент отрендерился (didMount)
     const handleClickCLose = (event) => {
-      if (!event.path.includes(sortRef.current)) {
+      if (!event.composedPath().includes(sortRef.current)) {
         setVisible(false);
       }
     };
-
     document.body.addEventListener('click', handleClickCLose);
     // очищает после эффекта (willUnmount)
     return () => {

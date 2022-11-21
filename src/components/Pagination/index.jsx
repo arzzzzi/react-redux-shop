@@ -12,9 +12,8 @@ export const Pagination = ({ currnetPage, onChangePage }) => {
       previousLabel="<"
       onPageChange={(event) => onChangePage(event.selected + 1)}
       pageRangeDisplayed={4}
-      pageCount={3}
+      pageCount={2}
       forcePage={currnetPage - 1}
-      renderOnZeroPageCount={null}
     />
   );
 };
