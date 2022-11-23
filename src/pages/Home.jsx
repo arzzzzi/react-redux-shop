@@ -5,7 +5,7 @@ import { PizzaBlock } from '../components/PizzaBlock';
 import { Skeleton } from '../components/PizzaBlock/Skeleton';
 import { Pagination } from '../components/Pagination';
 import qs from 'qs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectFilter,
@@ -74,11 +74,7 @@ const Home = () => {
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
-  const pizzas = items.map((obj) => (
-    <Link key={obj.id} to={`/pizza/${obj.id}`}>
-      <PizzaBlock {...obj} />
-    </Link>
-  ));
+  const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
   return (
     <div className="container">
