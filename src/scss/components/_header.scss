@@ -6,6 +6,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        .cart_and_search {
+            display: flex;
+        }
         @media (max-width: 645px) {
             flex-direction: column;
             .header__cart {
