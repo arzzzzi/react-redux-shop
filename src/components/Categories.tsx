@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export const Categories = ({ value, onClickCategory }) => {
+type CategoriesProps = {
+  value: number;
+  onClickCategory: any;
+};
+
+export const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
   return (

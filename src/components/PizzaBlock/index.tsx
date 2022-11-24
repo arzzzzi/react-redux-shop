@@ -5,9 +5,19 @@ import { Link } from 'react-router-dom';
 
 const typeNames = ['тонкое', 'традиционное'];
 
-export const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
-  const [activeType, setActiveType] = useState(0);
-  const [pizzaSize, setPizzaSize] = useState(0);
+type IPizzaBlock = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+  rating: number;
+};
+
+export const PizzaBlock: React.FC<IPizzaBlock> = ({ id, title, price, imageUrl, sizes, types }) => {
+  const [activeType, setActiveType] = useState<number>(0);
+  const [pizzaSize, setPizzaSize] = useState<number>(0);
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemByID(id));
 
