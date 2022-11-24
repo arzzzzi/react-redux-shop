@@ -26,10 +26,15 @@ export const Sort = () => {
     setVisible(false);
   };
 
+  type ClickClose = MouseEvent & {
+    path: Node[];
+  };
+
   useEffect(() => {
     // когда компонент отрендерился (didMount)
-    const handleClickCLose = (event: any) => {
-      if (!event.composedPath().includes(sortRef.current)) {
+    const handleClickCLose = (event: MouseEvent) => {
+      const _event = event as ClickClose;
+      if (sortRef.current && !_event.path.includes(sortRef.current)) {
         setVisible(false);
       }
     };

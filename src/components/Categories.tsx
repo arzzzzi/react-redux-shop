@@ -2,20 +2,20 @@ import React from 'react';
 
 type CategoriesProps = {
   value: number;
-  onClickCategory: any;
+  onClickCategory: (index: number) => void;
 };
 
-export const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
-  const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
+export const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
   return (
     <div className="categories">
       <ul>
-        {categories.map((item, index) => (
+        {categories.map((item, idx) => (
           <li
-            key={index}
-            onClick={() => onClickCategory(index)}
-            className={value === index ? 'active' : ''}>
+            key={idx}
+            onClick={() => onClickCategory(idx)}
+            className={value === idx ? 'active' : ''}>
             {item}
           </li>
         ))}
