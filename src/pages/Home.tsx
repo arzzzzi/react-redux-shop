@@ -1,26 +1,27 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { Categories } from '../components/Categories';
-import { SortPopup, list } from '../components/Sort';
+import { SortPopup } from '../components/Sort';
 import { PizzaBlock } from '../components/PizzaBlock';
 import { Skeleton } from '../components/PizzaBlock/Skeleton';
 import { Pagination } from '../components/Pagination';
-import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+// import qs from 'qs';
+// import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
-  selectFilter,
   setCategoryId,
   setCurrentPage,
-  setFilters,
-} from '../redux/slices/filterSlice';
-import { fetchPizzas, SearchPizzaParams, selectPizzaData } from '../redux/slices/pizzasSlice';
+  // setFilters,
+} from '../redux/slices/filter/slice';
+import { selectFilter } from '../redux/slices/filter/selectors';
+import { fetchPizzas } from '../redux/slices/pizza/asyncActions';
+import { selectPizzaData } from '../redux/slices/pizza/selectors';
 import { useAppDispatch } from '../redux/store';
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const isSearch = useRef(false);
-  const isMounted = useRef(false);
+  // const isMounted = useRef(false);
   const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzaData);
 
