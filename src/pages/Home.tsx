@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { Categories } from '../components/Categories';
 import { SortPopup, list } from '../components/Sort';
 import { PizzaBlock } from '../components/PizzaBlock';
@@ -6,7 +6,7 @@ import { Skeleton } from '../components/PizzaBlock/Skeleton';
 import { Pagination } from '../components/Pagination';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   selectFilter,
   setCategoryId,
@@ -27,6 +27,8 @@ const Home: React.FC = () => {
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
   };
+
+  const onChangeCategory = useCallback((idx: number) => dispatch(setCategoryId(idx)), []);
 
   const getPizzas = async () => {
     const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
@@ -87,11 +89,8 @@ const Home: React.FC = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          onClickCategory={(idx: number) => dispatch(setCategoryId(idx))}
-          value={categoryId}
-        />
-        <SortPopup />
+        <Categories onChangeCategory={onChangeCategory} value={categoryId} />
+        <SortPopup value={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === 'error' ? (

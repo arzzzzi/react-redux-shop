@@ -2,19 +2,19 @@ import React from 'react';
 
 type CategoriesProps = {
   value: number;
-  onClickCategory: (index: number) => void;
+  onChangeCategory: (index: number) => void;
 };
 
 const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-export const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
+export const Categories: React.FC<CategoriesProps> = React.memo(({ value, onChangeCategory }) => {
   return (
     <div className="categories">
       <ul>
         {categories.map((item, idx) => (
           <li
             key={idx}
-            onClick={() => onClickCategory(idx)}
+            onClick={() => onChangeCategory(idx)}
             className={value === idx ? 'active' : ''}>
             {item}
           </li>
@@ -22,4 +22,4 @@ export const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }
       </ul>
     </div>
   );
-};
+});
