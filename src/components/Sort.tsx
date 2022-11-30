@@ -12,15 +12,14 @@ export const list: SortItem[] = [
   { name: 'популярности ↑', sortProperty: SortPropertyEnum.RATING_ASC },
   { name: 'цене ↓', sortProperty: SortPropertyEnum.PRICE_DESC },
   { name: 'цене ↑', sortProperty: SortPropertyEnum.PRICE_ASC },
-  { name: 'алфавиту ↓', sortProperty: SortPropertyEnum.PRICE_DESC },
+  { name: 'алфавиту ↓', sortProperty: SortPropertyEnum.TITLE_DESC },
   { name: 'алфавиту ↑', sortProperty: SortPropertyEnum.TITLE_ASC },
 ];
 
 type SortPopupProps = {
   value: Sort;
 };
-
-export const SortPopup: React.FC<SortPopupProps> = React.memo(({ value }) => {
+const SortPopup: React.FC<SortPopupProps> = React.memo(({ value }) => {
   const dispatch = useDispatch();
   const sortRef = useRef<HTMLDivElement>(null);
 
@@ -84,3 +83,5 @@ export const SortPopup: React.FC<SortPopupProps> = React.memo(({ value }) => {
     </div>
   );
 });
+
+export default SortPopup;

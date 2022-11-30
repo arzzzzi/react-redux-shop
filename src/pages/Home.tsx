@@ -1,9 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { Categories } from '../components/Categories';
-import { SortPopup } from '../components/Sort';
-import { PizzaBlock } from '../components/PizzaBlock';
-import { Skeleton } from '../components/PizzaBlock/Skeleton';
-import { Pagination } from '../components/Pagination';
+import { Categories, Skeleton, PizzaBlock, SortPopup, Pagination } from '../components/';
 // import qs from 'qs';
 // import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';

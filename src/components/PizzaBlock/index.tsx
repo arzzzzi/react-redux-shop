@@ -17,7 +17,7 @@ type IPizzaBlock = {
   rating: number;
 };
 
-export const PizzaBlock: React.FC<IPizzaBlock> = ({ id, title, price, imageUrl, sizes, types }) => {
+const PizzaBlock: React.FC<IPizzaBlock> = ({ id, title, price, imageUrl, sizes, types }) => {
   const [activeType, setActiveType] = useState<number>(0);
   const [pizzaSize, setPizzaSize] = useState<number>(0);
   const dispatch = useDispatch();
@@ -89,3 +89,5 @@ export const PizzaBlock: React.FC<IPizzaBlock> = ({ id, title, price, imageUrl, 
     </div>
   );
 };
+
+export default PizzaBlock;
